@@ -51,7 +51,7 @@ public class ActionLogAop {
             actionLog.setType(type);
             actionLog.setTradeItemId(desc.hashCode());
             Integer result = actionLogMapper.insert(actionLog);
-            if (result > 1) {
+            if (result > 0) {
                 logger.info("the log is insert success");
             }
 
