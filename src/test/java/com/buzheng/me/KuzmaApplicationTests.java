@@ -6,11 +6,17 @@ import com.buzheng.me.proxy.common.RealSubject;
 import com.buzheng.me.proxy.common.Subject;
 import com.buzheng.me.proxy.dynamic.DynamicProxyHandler;
 import com.buzheng.me.service.StudentService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
+
+import javax.annotation.Resource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -46,10 +52,25 @@ public class KuzmaApplicationTests {
         s.exec();
     }
 
-//    @Test
-//    public void testFindById() {
-//        ActionLog actionLog = mapper.findById(1);
-//        return;
-//    }
+    @Resource
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private Jedis jedis;
+
+    @Test
+    public void testRedis() {
+        redisTemplate.opsForValue().set("name", "jaychou");
+    }
+
+    @Test
+    public void testJedis() {
+        jedis.set("age", "12");
+        String age = jedis.get("age");
+        jedis.close();
+        Assert.assertEquals(age, "12");
+    }
+
+
 
 }
