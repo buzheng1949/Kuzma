@@ -33,8 +33,8 @@ public class Config {
     private Logger LOG = LoggerFactory.getLogger(Config.class);
 
     @Bean
-    Jedis jedis(){
-        Jedis jedis = new Jedis("127.0.0.1",6379);
+    Jedis jedis() {
+        Jedis jedis = new Jedis("127.0.0.1", 6379);
         return jedis;
     }
 
@@ -53,4 +53,13 @@ public class Config {
         template.setKeySerializer(new StringRedisSerializer());
         return template;
     }
+
+
+    @Bean
+    public StringRedisTemplate stringRedisTemplate() {
+        StringRedisTemplate stringRedisTemplate = new StringRedisTemplate(jedisConnectionFactory());
+        return stringRedisTemplate;
+    }
+
+
 }
