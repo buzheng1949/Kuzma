@@ -1,4 +1,4 @@
-package com.buzheng.me.lock;
+package com.buzheng.me.lock.redis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
